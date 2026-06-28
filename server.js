@@ -38,8 +38,16 @@ const server = http.createServer((req, res) => {
   const pathname = parsed.pathname;
   const q = parsed.query;
 
+  // === أضف هذا الجزء قبل أي شيء آخر ===
+  // خدمة ملف vedeo.html من جذر المشروع عند طلب /vedeo.html
+  if (pathname === '/vedeo.html') {
+    return serveStatic(res, path.join(__dirname, 'vedeo.html'));
+  }
+  // === نهاية الإضافة ===
+
   // API Routes
   if (pathname.startsWith('/api/')) {
+    // ... باقي كود الـ API كما هو دون تغيير ...
     
     if (pathname === '/api/products') {
       let results = [...ALL_PRODUCTS];
@@ -100,7 +108,7 @@ const server = http.createServer((req, res) => {
     return jsonRes(res, {error:'not found'}, 404);
   }
 
-  // Static Files
+  // Static Files (الصفحة الرئيسية وباقي الملفات في public)
   let filePath;
   if (pathname === '/' || !pathname.includes('.')) {
     filePath = path.join(__dirname, 'public', 'index.html');
