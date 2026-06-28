@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rovexa - تسوق الفخامة بسعر مناسب</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="main-header">
+  <div class="header-top">
+    <div class="logo" onclick="navigate('home')">
+      <span class="logo-r">R</span><span class="logo-text">ovexa</span>
+    </div>
+    <div class="search-bar">
+      <div class="search-category-select">
+        <select id="search-cat">
+          <option value="">كل الفئات</option>
+          <option value="watches">ساعات</option>
+          <option value="bags">شنط وحقائب</option>
+          <option value="perfumes">عطور</option>
+          <option value="watchAccessories">مستلزمات ساعات</option>
+          <option value="sports">مستلزمات رياضية</option>
+        </select>
+      </div>
+      <input type="text" id="search-input" placeholder="ابحث في Rovexa..." autocomplete="off">
+      <button class="search-btn" onclick="doSearch()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <div id="search-suggestions" class="search-suggestions"></div>
+    </div>
+    <div class="header-actions">
+      <div class="header-icon" onclick="navigate('account')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>حسابي</span>
+      </div>
+      <div class="header-icon" onclick="navigate('wishlist')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>المفضلة</span>
+        <span class="badge" id="wishlist-count">0</span>
+      </div>
+      <div class="header-icon cart-icon" onclick="toggleCart()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span>السلة</span>
+        <span class="badge" id="cart-count">0</span>
+      </div>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <a onclick="navigate('home')" class="nav-link">الرئيسية</a>
+    <a onclick="filterCategory('watches')" class="nav-link">⌚ ساعات</a>
+    <a onclick="filterCategory('bags')" class="nav-link">👜 شنط وحقائب</a>
+    <a onclick="filterCategory('perfumes')" class="nav-link">🌸 عطور</a>
+    <a onclick="filterCategory('watchAccessories')" class="nav-link">🔧 مستلزمات ساعات</a>
+    <a onclick="filterCategory('sports')" class="nav-link">🏃 مستلزمات رياضية</a>
+    <a onclick="navigate('deals')" class="nav-link deals-link">🔥 عروض اليوم</a>
+  </nav>
+</header>
+
+<!-- CART SIDEBAR -->
+<div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+<div id="cart-sidebar" class="cart-sidebar">
+  <div class="cart-header">
+    <h3>🛒 سلة التسوق</h3>
+    <button onclick="toggleCart()" class="close-btn">✕</button>
+  </div>
+  <div id="cart-items" class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      المجموع: <strong id="cart-total">0</strong> ر.س
+    </div>
+    <button class="checkout-btn" onclick="checkout()">إتمام الشراء</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main id="app">
+  <!-- HOME PAGE -->
+  <div id="page-home">
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-slides" id="hero-slides">
+        <div class="hero-slide active" style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)">
+          <div class="hero-content">
+            <div class="hero-badge">✨ وصل حديثاً</div>
+            <h1>تسوق الفخامة<br><span>بأفضل الأسعار</span></h1>
+            <p>اكتشف أكثر من 1000 منتج من أفخم الماركات العالمية</p>
+            <button class="hero-btn" onclick="filterCategory('watches')">تسوق الآن</button>
+          </div>
+          <div class="hero-image">🕰️</div>
+        </div>
+        <div class="hero-slide" style="background: linear-gradient(135deg, #1a0a2e 0%, #2d1b69 50%, #11998e 100%)">
+          <div class="hero-content">
+            <div class="hero-badge">🔥 تخفيضات حصرية</div>
+            <h1>عطور فاخرة<br><span>خصم حتى 30%</span></h1>
+            <p>أفضل العطور العالمية بأسعار لا تقبل المنافسة</p>
+            <button class="hero-btn" onclick="filterCategory('perfumes')">اكتشف العطور</button>
+          </div>
+          <div class="hero-image">🌸</div>
+        </div>
+        <div class="hero-slide" style="background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 50%, #c9a227 100%)">
+          <div class="hero-content">
+            <div class="hero-badge">👑 ماركات عالمية</div>
+            <h1>حقائب<br><span>بتوقيع المصممين</span></h1>
+            <p>Louis Vuitton • Gucci • Prada • Chanel</p>
+            <button class="hero-btn" onclick="filterCategory('bags')">تسوق الحقائب</button>
+          </div>
+          <div class="hero-image">👜</div>
+        </div>
+      </div>
+      <div class="hero-dots">
+        <span class="dot active" onclick="goSlide(0)"></span>
+        <span class="dot" onclick="goSlide(1)"></span>
+        <span class="dot" onclick="goSlide(2)"></span>
+      </div>
+    </div>
+
+    <!-- Quick Categories -->
+    <section class="quick-cats">
+      <div class="container">
+        <div class="cats-grid">
+          <div class="cat-card" onclick="filterCategory('watches')">
+            <div class="cat-icon">⌚</div>
+            <div class="cat-name">ساعات</div>
+            <div class="cat-count" id="cat-count-watches">200 منتج</div>
+          </div>
+          <div class="cat-card" onclick="filterCategory('bags')">
+            <div class="cat-icon">👜</div>
+            <div class="cat-name">شنط وحقائب</div>
+            <div class="cat-count" id="cat-count-bags">200 منتج</div>
+          </div>
+          <div class="cat-card" onclick="filterCategory('perfumes')">
+            <div class="cat-icon">🌸</div>
+            <div class="cat-name">عطور</div>
+            <div class="cat-count" id="cat-count-perfumes">200 منتج</div>
+          </div>
+          <div class="cat-card" onclick="filterCategory('watchAccessories')">
+            <div class="cat-icon">🔧</div>
+            <div class="cat-name">مستلزمات ساعات</div>
+            <div class="cat-count" id="cat-count-watchAccessories">200 منتج</div>
+          </div>
+          <div class="cat-card" onclick="filterCategory('sports')">
+            <div class="cat-icon">🏃</div>
+            <div class="cat-name">مستلزمات رياضية</div>
+            <div class="cat-count" id="cat-count-sports">200 منتج</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deals Banner -->
+    <section class="deals-banner">
+      <div class="container">
+        <div class="deals-header">
+          <h2>🔥 عروض اليوم</h2>
+          <div class="countdown" id="deal-countdown">يتجدد كل 24 ساعة</div>
+          <a onclick="navigate('deals')" class="see-all">عرض الكل ←</a>
+        </div>
+        <div class="products-scroll" id="deals-row"></div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>⭐ المنتجات المميزة</h2>
+          <a onclick="navigate('products')" class="see-all">عرض الكل ←</a>
+        </div>
+        <div class="products-grid" id="featured-grid"></div>
+      </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-section">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <div class="trust-icon">🚚</div>
+            <div class="trust-title">شحن سريع</div>
+            <div class="trust-desc">توصيل خلال 2-5 أيام</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">🔒</div>
+            <div class="trust-title">دفع آمن</div>
+            <div class="trust-desc">جميع طرق الدفع مقبولة</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">↩️</div>
+            <div class="trust-title">إرجاع مجاني</div>
+            <div class="trust-desc">30 يوم ضمان الإرجاع</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">🏆</div>
+            <div class="trust-title">منتجات أصلية</div>
+            <div class="trust-desc">ضمان الأصالة 100%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PRODUCTS PAGE -->
+  <div id="page-products" style="display:none">
+    <div class="container products-layout">
+      <!-- Sidebar Filters -->
+      <aside class="filters-sidebar" id="filters-sidebar">
+        <div class="filter-header">
+          <h3>تصفية النتائج</h3>
+          <button onclick="clearFilters()" class="clear-filters">مسح الكل</button>
+        </div>
+
+        <div class="filter-group">
+          <h4>الفئة</h4>
+          <div class="filter-options" id="category-filters">
+            <label><input type="radio" name="cat" value="" onchange="applyFilters()"> الكل</label>
+            <label><input type="radio" name="cat" value="watches" onchange="applyFilters()"> ⌚ ساعات</label>
+            <label><input type="radio" name="cat" value="bags" onchange="applyFilters()"> 👜 شنط وحقائب</label>
+            <label><input type="radio" name="cat" value="perfumes" onchange="applyFilters()"> 🌸 عطور</label>
+            <label><input type="radio" name="cat" value="watchAccessories" onchange="applyFilters()"> 🔧 مستلزمات ساعات</label>
+            <label><input type="radio" name="cat" value="sports" onchange="applyFilters()"> 🏃 مستلزمات رياضية</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>نطاق السعر</h4>
+          <div class="price-range">
+            <input type="number" id="min-price" placeholder="من" onchange="applyFilters()">
+            <span>-</span>
+            <input type="number" id="max-price" placeholder="إلى" onchange="applyFilters()">
+          </div>
+          <div class="quick-prices">
+            <button onclick="setPrice(0,100)">تحت 100</button>
+            <button onclick="setPrice(100,500)">100-500</button>
+            <button onclick="setPrice(500,2000)">500-2000</button>
+            <button onclick="setPrice(2000,99999)">أكثر من 2000</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>التقييم</h4>
+          <div class="filter-options">
+            <label><input type="radio" name="rating" value="" onchange="applyFilters()"> الكل</label>
+            <label><input type="radio" name="rating" value="4" onchange="applyFilters()"> ⭐⭐⭐⭐ وما فوق</label>
+            <label><input type="radio" name="rating" value="3" onchange="applyFilters()"> ⭐⭐⭐ وما فوق</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="check-label">
+            <input type="checkbox" id="in-stock" onchange="applyFilters()">
+            متوفر في المخزون فقط
+          </label>
+          <label class="check-label">
+            <input type="checkbox" id="has-discount" onchange="applyFilters()">
+            العروض والتخفيضات فقط
+          </label>
+        </div>
+      </aside>
+
+      <!-- Products Area -->
+      <div class="products-area">
+        <div class="products-toolbar">
+          <div class="results-info" id="results-info">جاري التحميل...</div>
+          <div class="toolbar-actions">
+            <button class="filter-toggle-mobile" onclick="toggleFilters()">⚙️ فلاتر</button>
+            <select id="sort-select" onchange="applyFilters()">
+              <option value="">الأكثر شعبية</option>
+              <option value="price_asc">السعر: من الأقل للأعلى</option>
+              <option value="price_desc">السعر: من الأعلى للأقل</option>
+              <option value="rating">الأعلى تقييماً</option>
+              <option value="discount">الأكثر خصماً</option>
+              <option value="newest">الأحدث</option>
+            </select>
+            <div class="view-toggle">
+              <button id="grid-view-btn" class="active" onclick="setView('grid')">⊞</button>
+              <button id="list-view-btn" onclick="setView('list')">≡</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="products-grid" id="products-grid"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT DETAIL PAGE -->
+  <div id="page-detail" style="display:none">
+    <div class="container">
+      <div class="breadcrumb" id="detail-breadcrumb"></div>
+      <div class="product-detail">
+        <div class="detail-gallery">
+          <img id="detail-main-img" src="" alt="">
+          <div class="detail-thumbs" id="detail-thumbs"></div>
+        </div>
+        <div class="detail-info">
+          <div class="detail-brand" id="detail-brand"></div>
+          <h1 id="detail-name"></h1>
+          <div class="detail-rating" id="detail-rating"></div>
+          <div class="detail-price-box">
+            <div class="detail-price" id="detail-price"></div>
+            <div class="detail-original" id="detail-original"></div>
+            <div class="detail-discount" id="detail-discount"></div>
+          </div>
+          <div class="detail-prime" id="detail-prime"></div>
+          <div class="detail-stock" id="detail-stock"></div>
+          <div class="detail-desc" id="detail-desc"></div>
+          <div class="detail-actions">
+            <div class="qty-selector">
+              <button onclick="changeQty(-1)">−</button>
+              <span id="qty-display">1</span>
+              <button onclick="changeQty(1)">+</button>
+            </div>
+            <button class="add-to-cart-btn" id="detail-add-btn" onclick="addDetailToCart()">🛒 أضف إلى السلة</button>
+            <button class="wishlist-btn" onclick="toggleWishlistDetail()">♡ المفضلة</button>
+          </div>
+        </div>
+      </div>
+      <div class="related-section">
+        <h2>منتجات مشابهة</h2>
+        <div class="products-grid" id="related-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEALS PAGE -->
+  <div id="page-deals" style="display:none">
+    <div class="container">
+      <div class="page-title-bar">
+        <h1>🔥 عروض اليوم</h1>
+        <p>أفضل التخفيضات مجمعة في مكان واحد</p>
+      </div>
+      <div class="products-grid" id="deals-grid"></div>
+    </div>
+  </div>
+</main>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-logo"><span class="logo-r">R</span>ovexa</div>
+        <p>متجرك الإلكتروني للفخامة والأناقة. أكثر من 1000 منتج أصيل من أشهر الماركات العالمية.</p>
+      </div>
+      <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a onclick="navigate('home')">الرئيسية</a></li>
+          <li><a onclick="navigate('deals')">عروض اليوم</a></li>
+          <li><a onclick="filterCategory('watches')">ساعات</a></li>
+          <li><a onclick="filterCategory('bags')">حقائب</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>خدمة العملاء</h4>
+        <ul>
+          <li><a href="#">تواصل معنا</a></li>
+          <li><a href="#">سياسة الإرجاع</a></li>
+          <li><a href="#">الشحن والتوصيل</a></li>
+          <li><a href="#">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>تواصل معنا</h4>
+        <p>📧 support@rovexa.com</p>
+        <p>📞 +966-800-ROVEXA</p>
+        <div class="social-links">
+          <a href="#">📘</a><a href="#">📷</a><a href="#">🐦</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Rovexa جميع الحقوق محفوظة</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
